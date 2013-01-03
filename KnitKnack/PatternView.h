@@ -17,4 +17,7 @@
 
 - (id)initWithFrame:(CGRect)frame image:(UIImage *)image;
 
+- (void)moveUp;
+- (void)moveDown;
+
 @end

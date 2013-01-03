@@ -21,6 +21,14 @@ typedef NS_ENUM(NSInteger, PatternViewHandle) {
     PatternViewHandle editingHandle;
 }
 
+- (CGAffineTransform)computeTransform;
+- (CGImageRef)createOffscreenImage;
+
+- (CGRect)shadow1;
+- (CGRect)handle1;
+- (CGRect)shadow2;
+- (CGRect)handle2;
+
 @end
 
 @implementation PatternView
@@ -105,6 +113,30 @@ typedef NS_ENUM(NSInteger, PatternViewHandle) {
     CGContextRelease(context);
 
     return cgImage;
+}
+
+- (void)moveUp {
+    CGFloat dy = y2 - y1;
+    if (y1 - dy < 10) {
+        return;
+    }
+
+    y2 = y1;
+    y1 -= dy;
+
+    [self setNeedsDisplay];
+}
+
+- (void)moveDown {
+    CGFloat dy = y2 - y1;
+    if (y2 + dy > self.bounds.size.height - 10) {
+        return;
+    }
+
+    y1 = y2;
+    y2 += dy;
+
+    [self setNeedsDisplay];
 }
 
 - (CGRect)shadow1 {

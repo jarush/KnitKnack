@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6841B9411695D48600F6F0FF /* MagnifyingGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6841B9401695D48600F6F0FF /* MagnifyingGlass.m */; };
 		68F1BE83169485820035CF8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F1BE82169485820035CF8C /* UIKit.framework */; };
 		68F1BE85169485820035CF8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F1BE84169485820035CF8C /* Foundation.framework */; };
 		68F1BE87169485820035CF8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F1BE86169485820035CF8C /* CoreGraphics.framework */; };
@@ -27,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6841B93F1695D48600F6F0FF /* MagnifyingGlass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagnifyingGlass.h; sourceTree = "<group>"; };
+		6841B9401695D48600F6F0FF /* MagnifyingGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagnifyingGlass.m; sourceTree = "<group>"; };
 		68F1BE7E169485820035CF8C /* KnitKnack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnitKnack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F1BE82169485820035CF8C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68F1BE84169485820035CF8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -100,6 +103,8 @@
 		68F1BE88169485820035CF8C /* KnitKnack */ = {
 			isa = PBXGroup;
 			children = (
+				6841B93F1695D48600F6F0FF /* MagnifyingGlass.h */,
+				6841B9401695D48600F6F0FF /* MagnifyingGlass.m */,
 				68F1BEAD1694860A0035CF8C /* AppDelegate.h */,
 				68F1BEAE1694860A0035CF8C /* AppDelegate.m */,
 				68F1BEA3169485D70035CF8C /* PatternView.h */,
@@ -212,6 +217,7 @@
 				68F1BEAA169485D70035CF8C /* PatternViewController.m in Sources */,
 				68F1BEAB169485D70035CF8C /* SelectionViewController.m in Sources */,
 				68F1BEAF1694860A0035CF8C /* AppDelegate.m in Sources */,
+				6841B9411695D48600F6F0FF /* MagnifyingGlass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

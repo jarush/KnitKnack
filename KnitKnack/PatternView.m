@@ -7,6 +7,10 @@
 //
 
 #import "PatternView.h"
+#import "MagnifyingGlass.h"
+
+#define HANDLE_SIZE      4
+#define GRAB_HANDLE_SIZE 40
 
 typedef NS_ENUM(NSInteger, PatternViewHandle) {
     PatternViewHandleNone,
@@ -19,15 +23,14 @@ typedef NS_ENUM(NSInteger, PatternViewHandle) {
     CGFloat y1;
     CGFloat y2;
     PatternViewHandle editingHandle;
+    MagnifyingGlass *magnifyingGlass;
 }
 
 - (CGAffineTransform)computeTransform;
 - (CGImageRef)createOffscreenImage;
 
-- (CGRect)shadow1;
-- (CGRect)handle1;
-- (CGRect)shadow2;
-- (CGRect)handle2;
+- (CGRect)grabHandle1;
+- (CGRect)grabHandle2;
 
 @end
 
@@ -40,12 +43,14 @@ typedef NS_ENUM(NSInteger, PatternViewHandle) {
 
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.shadowColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
-        self.barColor = [UIColor colorWithWhite:1.0f alpha:0.8f];
-        self.highlightBarColor = [UIColor colorWithRed:1.0f green:0.8f blue:0.3f alpha:0.8f];
+        self.barColor = [UIColor colorWithWhite:0.5f alpha:0.8f];
+        self.highlightBarColor = [UIColor colorWithRed:1.0f green:0.8f blue:0.3f alpha:0.5f];
         self.backgroundColor = [UIColor blackColor];
 
         y1 = 100.0f;
         y2 = 200.0f;
+        editingHandle = PatternViewHandleNone;
+        magnifyingGlass = nil;
     }
     return self;
 }
@@ -139,32 +144,37 @@ typedef NS_ENUM(NSInteger, PatternViewHandle) {
     [self setNeedsDisplay];
 }
 
-- (CGRect)shadow1 {
-    return CGRectMake(0, 0, self.bounds.size.width, y1);
+- (CGRect)grabHandle1 {
+    return CGRectMake(0, y1 - GRAB_HANDLE_SIZE / 2.0f, self.bounds.size.width, GRAB_HANDLE_SIZE);
 }
 
-- (CGRect)handle1 {
-    return CGRectMake(0, y1 - 20, self.bounds.size.width, 40);
-}
-
-- (CGRect)shadow2 {
-    return CGRectMake(0, y2, self.bounds.size.width, self.bounds.size.height - y2);
-}
-
-- (CGRect)handle2 {
-    return CGRectMake(0, y2 - 20, self.bounds.size.width, 40);
+- (CGRect)grabHandle2 {
+    return CGRectMake(0, y2 - GRAB_HANDLE_SIZE / 2.0f, self.bounds.size.width, GRAB_HANDLE_SIZE);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
+    CGFloat y = 0;
 
-    if (CGRectContainsPoint(self.handle1, point)) {
+    if (CGRectContainsPoint(self.grabHandle1, point)) {
         editingHandle = PatternViewHandle1;
-    } else if (CGRectContainsPoint(self.handle2, point)) {
+        y = y1;
+    } else if (CGRectContainsPoint(self.grabHandle2, point)) {
         editingHandle = PatternViewHandle2;
+        y = y2;
     } else {
         editingHandle = PatternViewHandleNone;
+    }
+
+    if (editingHandle != PatternViewHandleNone && magnifyingGlass == nil) {
+        magnifyingGlass = [[MagnifyingGlass alloc] initWithFrame:CGRectMake(0, 0, 120, 120)];
+        magnifyingGlass.viewToMagnify = self;
+        magnifyingGlass.scale = 3.0f;
+        magnifyingGlass.touchPoint = CGPointMake(point.x, y);
+
+        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+        [keyWindow addSubview:magnifyingGlass];
     }
 
     [self setNeedsDisplay];
@@ -179,14 +189,22 @@ typedef NS_ENUM(NSInteger, PatternViewHandle) {
     // Update the correct handle
     switch (editingHandle) {
         case PatternViewHandle1:
-            if (y > 10 && y < y2 - 2) {
-                y1 = y;
+            y1 = y;
+            if (y1 < 10) {
+                y1 = 10;
+            }
+            if (y1 > y2) {
+                y1 = y2;
             }
             break;
 
         case PatternViewHandle2:
-            if (y < h - 10 && y > y1 + 2) {
-                y2 = y;
+            y2 = y;
+            if (y2 > h - 10) {
+                y2 = h - 10;
+            }
+            if (y2 < y1) {
+                y2 = y1;
             }
             break;
 
@@ -194,11 +212,19 @@ typedef NS_ENUM(NSInteger, PatternViewHandle) {
             break;
     }
 
+    if (editingHandle != PatternViewHandleNone) {
+        magnifyingGlass.touchPoint = point;
+    }
+
     [self setNeedsDisplay];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     editingHandle = PatternViewHandleNone;
+    
+    [magnifyingGlass removeFromSuperview];
+    [magnifyingGlass release];
+    magnifyingGlass = nil;
 
     [self setNeedsDisplay];
 }
@@ -212,25 +238,22 @@ typedef NS_ENUM(NSInteger, PatternViewHandle) {
 
     // Draw the shadows
     CGContextSetFillColorWithColor(context, self.shadowColor.CGColor);
-    CGContextFillRect(context, [self shadow1]);
-    CGContextFillRect(context, [self shadow2]);
-
-    // Draw the shadow lines
-    CGContextSetLineWidth(context, 4.0);
+    CGRect shadowRect1 = CGRectMake(0, 0, self.bounds.size.width, y1 - HANDLE_SIZE);
+    CGContextFillRect(context, shadowRect1);
+    CGRect shadowRect2 = CGRectMake(0, y2 + HANDLE_SIZE, self.bounds.size.width, self.bounds.size.height - y2 - HANDLE_SIZE);
+    CGContextFillRect(context, shadowRect2);
 
     // Draw handle 1
     UIColor *color = editingHandle == PatternViewHandle1 ? self.highlightBarColor : self.barColor;
-    CGContextSetStrokeColorWithColor(context, color.CGColor);
-    CGContextMoveToPoint(context, 0, y1);
-    CGContextAddLineToPoint(context, clipRect.size.width, y1);
-    CGContextStrokePath(context);
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGRect handleRect1 = CGRectMake(0, y1 - HANDLE_SIZE, self.bounds.size.width, HANDLE_SIZE);
+    CGContextFillRect(context, handleRect1);
 
     // Draw handle 2
     color = editingHandle == PatternViewHandle2 ? self.highlightBarColor : self.barColor;
-    CGContextSetStrokeColorWithColor(context, color.CGColor);
-    CGContextMoveToPoint(context, 0, y2);
-    CGContextAddLineToPoint(context, clipRect.size.width, y2);
-    CGContextStrokePath(context);
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    CGRect handleRect2 = CGRectMake(0, y2, self.bounds.size.width, HANDLE_SIZE);
+    CGContextFillRect(context, handleRect2);
 }
 
 @end

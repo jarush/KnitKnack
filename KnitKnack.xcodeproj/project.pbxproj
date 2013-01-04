@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6841B9411695D48600F6F0FF /* MagnifyingGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = 6841B9401695D48600F6F0FF /* MagnifyingGlass.m */; };
+		6886F4771696972D0049E858 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6886F4761696972D0049E858 /* ImageIO.framework */; };
 		68F1BE83169485820035CF8C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F1BE82169485820035CF8C /* UIKit.framework */; };
 		68F1BE85169485820035CF8C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F1BE84169485820035CF8C /* Foundation.framework */; };
 		68F1BE87169485820035CF8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F1BE86169485820035CF8C /* CoreGraphics.framework */; };
@@ -16,8 +16,6 @@
 		68F1BE95169485820035CF8C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F1BE94169485820035CF8C /* Default.png */; };
 		68F1BE97169485820035CF8C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F1BE96169485820035CF8C /* Default@2x.png */; };
 		68F1BE99169485820035CF8C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F1BE98169485820035CF8C /* Default-568h@2x.png */; };
-		68F1BEA9169485D70035CF8C /* PatternView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F1BEA4169485D70035CF8C /* PatternView.m */; };
-		68F1BEAA169485D70035CF8C /* PatternViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F1BEA6169485D70035CF8C /* PatternViewController.m */; };
 		68F1BEAB169485D70035CF8C /* SelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F1BEA8169485D70035CF8C /* SelectionViewController.m */; };
 		68F1BEAF1694860A0035CF8C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F1BEAE1694860A0035CF8C /* AppDelegate.m */; };
 		68F1BEB11694865B0035CF8C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F1BEB01694865B0035CF8C /* MobileCoreServices.framework */; };
@@ -28,8 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6841B93F1695D48600F6F0FF /* MagnifyingGlass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagnifyingGlass.h; sourceTree = "<group>"; };
-		6841B9401695D48600F6F0FF /* MagnifyingGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagnifyingGlass.m; sourceTree = "<group>"; };
+		6886F4761696972D0049E858 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		6886F479169699CC0049E858 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		68F1BE7E169485820035CF8C /* KnitKnack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KnitKnack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F1BE82169485820035CF8C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68F1BE84169485820035CF8C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -41,10 +39,6 @@
 		68F1BE94169485820035CF8C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		68F1BE96169485820035CF8C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		68F1BE98169485820035CF8C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		68F1BEA3169485D70035CF8C /* PatternView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatternView.h; sourceTree = "<group>"; };
-		68F1BEA4169485D70035CF8C /* PatternView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatternView.m; sourceTree = "<group>"; };
-		68F1BEA5169485D70035CF8C /* PatternViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatternViewController.h; sourceTree = "<group>"; };
-		68F1BEA6169485D70035CF8C /* PatternViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatternViewController.m; sourceTree = "<group>"; };
 		68F1BEA7169485D70035CF8C /* SelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectionViewController.h; sourceTree = "<group>"; };
 		68F1BEA8169485D70035CF8C /* SelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewController.m; sourceTree = "<group>"; };
 		68F1BEAD1694860A0035CF8C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -61,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6886F4771696972D0049E858 /* ImageIO.framework in Frameworks */,
 				68F1BE83169485820035CF8C /* UIKit.framework in Frameworks */,
 				68F1BE85169485820035CF8C /* Foundation.framework in Frameworks */,
 				68F1BE87169485820035CF8C /* CoreGraphics.framework in Frameworks */,
@@ -92,6 +87,8 @@
 		68F1BE81169485820035CF8C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6886F479169699CC0049E858 /* CoreImage.framework */,
+				6886F4761696972D0049E858 /* ImageIO.framework */,
 				68F1BE82169485820035CF8C /* UIKit.framework */,
 				68F1BE84169485820035CF8C /* Foundation.framework */,
 				68F1BE86169485820035CF8C /* CoreGraphics.framework */,
@@ -105,12 +102,6 @@
 			children = (
 				68F1BEAD1694860A0035CF8C /* AppDelegate.h */,
 				68F1BEAE1694860A0035CF8C /* AppDelegate.m */,
-				6841B93F1695D48600F6F0FF /* MagnifyingGlass.h */,
-				6841B9401695D48600F6F0FF /* MagnifyingGlass.m */,
-				68F1BEA3169485D70035CF8C /* PatternView.h */,
-				68F1BEA4169485D70035CF8C /* PatternView.m */,
-				68F1BEA5169485D70035CF8C /* PatternViewController.h */,
-				68F1BEA6169485D70035CF8C /* PatternViewController.m */,
 				68F1BEA7169485D70035CF8C /* SelectionViewController.h */,
 				68F1BEA8169485D70035CF8C /* SelectionViewController.m */,
 				68F1BE89169485820035CF8C /* Supporting Files */,
@@ -213,11 +204,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				68F1BE8F169485820035CF8C /* main.m in Sources */,
-				68F1BEA9169485D70035CF8C /* PatternView.m in Sources */,
-				68F1BEAA169485D70035CF8C /* PatternViewController.m in Sources */,
 				68F1BEAB169485D70035CF8C /* SelectionViewController.m in Sources */,
 				68F1BEAF1694860A0035CF8C /* AppDelegate.m in Sources */,
-				6841B9411695D48600F6F0FF /* MagnifyingGlass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

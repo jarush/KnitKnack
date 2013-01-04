@@ -103,10 +103,10 @@
 		68F1BE88169485820035CF8C /* KnitKnack */ = {
 			isa = PBXGroup;
 			children = (
-				6841B93F1695D48600F6F0FF /* MagnifyingGlass.h */,
-				6841B9401695D48600F6F0FF /* MagnifyingGlass.m */,
 				68F1BEAD1694860A0035CF8C /* AppDelegate.h */,
 				68F1BEAE1694860A0035CF8C /* AppDelegate.m */,
+				6841B93F1695D48600F6F0FF /* MagnifyingGlass.h */,
+				6841B9401695D48600F6F0FF /* MagnifyingGlass.m */,
 				68F1BEA3169485D70035CF8C /* PatternView.h */,
 				68F1BEA4169485D70035CF8C /* PatternView.m */,
 				68F1BEA5169485D70035CF8C /* PatternViewController.h */,

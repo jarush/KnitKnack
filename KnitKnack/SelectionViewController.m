@@ -10,6 +10,12 @@
 #import "PatternViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
+@interface SelectionViewController () {
+    UIPopoverController *popoverController;
+}
+
+@end
+
 @implementation SelectionViewController
 
 - (id)init {
@@ -24,6 +30,11 @@
     return self;
 }
 
+- (void)dealloc {
+    [popoverController release];
+    [super dealloc];
+}
+
 - (void)handleSelectImage:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         UIImagePickerController *imagePickerController= [[UIImagePickerController alloc] init];
@@ -32,7 +43,9 @@
         imagePickerController.delegate = self;
 
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
+            if (popoverController == nil) {
+                popoverController = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
+            }
             [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         } else {
             [self presentViewController:imagePickerController animated:YES completion:nil];
@@ -41,7 +54,11 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        [popoverController dismissPopoverAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 
     UIImage *image = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
     if (image == nil) {

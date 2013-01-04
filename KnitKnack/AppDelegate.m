@@ -11,12 +11,6 @@
 
 @implementation AppDelegate
 
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     SelectionViewController *selectionViewController = [[[SelectionViewController alloc] init] autorelease];
     UINavigationController *navigationViewController = [[[UINavigationController alloc] initWithRootViewController:selectionViewController] autorelease];
@@ -28,6 +22,11 @@
     [self.window makeKeyAndVisible];
 
     return YES;
+}
+
+- (void)dealloc {
+    [_window release];
+    [super dealloc];
 }
 
 @end
